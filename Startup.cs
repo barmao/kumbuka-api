@@ -1,4 +1,5 @@
 using kumbuka_api.Models;
+using kumbuka_api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,13 @@ namespace kumbuka_api
 
             //Register the database context
             services.AddDbContext<InventoryItemContext>(opt => opt.UseInMemoryDatabase("InventoryItems"));
+
+
+            services.Configure<InventoryItemsDatabaseSettings>(Configuration.GetSection(nameof(InventoryItemsDatabaseSettings)));
+
+            services.AddSingleton<IInventoryItemsDatabaseSettings>(sp => sp.GetRequiredService<IOptions<InventoryItemsDatabaseSettings>>().Value);
+
+            services.AddSingleton<InventoryItemsService>();
 
             services.AddSwaggerGen(c =>
             {
