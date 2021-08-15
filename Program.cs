@@ -11,6 +11,7 @@ namespace kumbuka_api
 {
     public class Program
     {
+        public static string DbConnectionString = "Server=localhost;Database=inventory;Trusted_Connection=True;";
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

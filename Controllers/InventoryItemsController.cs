@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using kumbuka_api.Models;
 using kumbuka_api.Services;
+using kumbuka_api.Repository;
 
 namespace kumbuka_api.Controllers
 {
@@ -23,62 +24,62 @@ namespace kumbuka_api.Controllers
 
         // GET: api/InventoryItems
         [HttpGet]
-        public ActionResult<List<InventoryItem>> Get() => _inventoryItemsService.Get();
+        public ActionResult<List<InventoryItem>> Get() => new GenericRepository<InventoryItem>().GetAll().ToList();
 
-        
+
         //// GET: api/InventoryItems/5
-        [HttpGet("{id:length(24)}", Name = "GetInventoryItems")]
-        public ActionResult<InventoryItem> Get(string id)
-        {
-            var item = _inventoryItemsService.Get(id);
+        //[HttpGet("{id:length(24)}", Name = "GetInventoryItems")]
+        //public ActionResult<InventoryItem> Get(long id)
+        //{
+        //    var item = _inventoryItemsService.Get(id);
 
-            if (item == null)
-            {
-                return NotFound();
-            }
+        //    if (item == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return item;
-        }
+        //    return item;
+        //}
 
-        //// POST: api/InventoryItems
-        [HttpPost]
-        public ActionResult<InventoryItem> Create(InventoryItem item)
-        {
-            _inventoryItemsService.Create(item);
+        ////// POST: api/InventoryItems
+        //[HttpPost]
+        //public ActionResult<InventoryItem> Create(InventoryItem item)
+        //{
+        //    _inventoryItemsService.Create(item);
 
-            return CreatedAtRoute("GetBook", new { id = item.Id.ToString() }, item);
-        }
+        //    return CreatedAtRoute("GetBook", new { id = item.Id.ToString() }, item);
+        //}
 
-        //// PUT: api/InventoryItems/5
-        [HttpPut("{id:length(24)}")]
-        public IActionResult Update(string id, InventoryItem itemIn)
-        {
-            var item = _inventoryItemsService.Get(id);
+        ////// PUT: api/InventoryItems/5
+        //[HttpPut("{id:length(24)}")]
+        //public IActionResult Update(long id, InventoryItem itemIn)
+        //{
+        //    var item = _inventoryItemsService.Get(id);
 
-            if (item == null)
-            {
-                return NotFound();
-            }
+        //    if (item == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _inventoryItemsService.Update(id, itemIn);
+        //    _inventoryItemsService.Update(id, itemIn);
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        //// DELETE: api/InventoryItems/5
-        [HttpDelete("{id:length(24)}")]
-        public IActionResult Delete(string id)
-        {
-            var item = _inventoryItemsService.Get(id);
+        ////// DELETE: api/InventoryItems/5
+        //[HttpDelete("{id:length(24)}")]
+        //public IActionResult Delete(long id)
+        //{
+        //    var item = _inventoryItemsService.Get(id);
 
-            if (item == null)
-            {
-                return NotFound();
-            }
+        //    if (item == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _inventoryItemsService.Remove(item.Id);
+        //    _inventoryItemsService.Remove(item.Id);
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
     }
 }

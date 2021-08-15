@@ -9,11 +9,7 @@ namespace kumbuka_api.Models
 {
     public class InventoryItem
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
-        [BsonElement("Name")]
+        public long Id { get; set; }
         public string Name { get; set; }
         public decimal Quantity { get; set; }
         public long AddedBy { get; set; }

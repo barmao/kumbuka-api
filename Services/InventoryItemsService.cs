@@ -22,8 +22,7 @@ namespace kumbuka_api.Services
         public List<InventoryItem> Get() =>
             _inventoryItems.Find(item => true).ToList();
 
-        public InventoryItem Get(string id) =>
-            _inventoryItems.Find<InventoryItem>(item => item.Id == id).FirstOrDefault();
+        public InventoryItem Get(long id) => _inventoryItems.Find<InventoryItem>(item => item.Id == id).FirstOrDefault();
 
         public InventoryItem Create(InventoryItem item)
         {
@@ -31,13 +30,11 @@ namespace kumbuka_api.Services
             return item;
         }
 
-        public void Update(string id, InventoryItem itemIn) =>
-            _inventoryItems.ReplaceOne(item => item.Id == id, itemIn);
+        public void Update(long id, InventoryItem itemIn) => _inventoryItems.ReplaceOne(item => item.Id == id, itemIn);
 
         public void Remove(InventoryItem itemIn) =>
             _inventoryItems.DeleteOne(item => item.Id == itemIn.Id);
 
-        public void Remove(string id) =>
-            _inventoryItems.DeleteOne(item => item.Id == id);
+        public void Remove(long id) => _inventoryItems.DeleteOne(item => item.Id == id);
     }
 }
